@@ -1,0 +1,12 @@
+[submodule "foundry1"]
+	path = foundry1
+	url = ./foundry1
+[submodule "openspace_foundry"]
+	path = openspace_foundry
+	url = ./openspace_foundry
+[submodule "openspace_foundry1"]
+	path = openspace_foundry1
+	url = ./openspace_foundry1
+[submodule "OpenSpaceWeb3BootCamp_S5"]
+	path = OpenSpaceWeb3BootCamp_S5
+	url = ./OpenSpaceWeb3BootCamp_S5
