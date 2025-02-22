@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT 查询界面</title>
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+       .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>NFT 信息查询</h1>
+        <input type="text" id="tokenId" placeholder="输入 NFT 的 Token ID">
+        <button id="queryButton">查询</button>
+        <div id="result"></div>
+    </div>
+    <script type="module">
+        import { createPublicClient, http } from 'https://esm.sh/viem';
+        import { mainnet } from 'https://esm.sh/viem/chains';
+
+        // 创建公共客户端
+        const publicClient = createPublicClient({
+            chain: mainnet,
+            transport: http('https://eth.drpc.org')
+        });
+
+        // NFT 合约地址
+        const contractAddress = '0x0483b0dfc6c78062b9e999a82ffb795925381415';
+
+        // ERC721 ABI 片段，包含 ownerOf 和 tokenURI 方法
+        const erc721ABI = [
+            {
+                "name": "ownerOf",
+                "type": "function",
+                "inputs": [
+                    {
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view"
+            },
+            {
+                "name": "tokenURI",
+                "type": "function",
+                "inputs": [
+                    {
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view"
+            }
+        ];
+
+        async function fetchNFTInfo() {
+            const tokenIdInput = document.getElementById('tokenId');
+            const tokenId = parseInt(tokenIdInput.value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(tokenId)) {
+                resultDiv.innerHTML = '<p>请输入有效的 Token ID。</p>';
+                return;
+            }
+
+            try {
+                // 读取指定 NFT 的持有人地址
+                const owner = await publicClient.readContract({
+                    address: contractAddress,
+                    abi: erc721ABI,
+                    functionName: 'ownerOf',
+                    args: [tokenId]
+                });
+
+                // 读取指定 NFT 的元数据 URI
+                const metadataURI = await publicClient.readContract({
+                    address: contractAddress,
+                    abi: erc721ABI,
+                    functionName: 'tokenURI',
+                    args: [tokenId]
+                });
+
+                resultDiv.innerHTML = `
+                    <p>NFT (tokenId: ${tokenId}) 的持有人地址是: ${owner}</p>
+                    <p>NFT (tokenId: ${tokenId}) 的元数据 URI 是: ${metadataURI}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<p>查询出错: ${error.message}</p>`;
+            }
+        }
+
+        // 获取按钮元素并绑定事件监听器
+        const queryButton = document.getElementById('queryButton');
+        queryButton.addEventListener('click', fetchNFTInfo);
+    </script>
+</body>
+
+</html>
