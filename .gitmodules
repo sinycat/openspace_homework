@@ -1,7 +1,3 @@
-[submodule "foundry1"]
-    path = foundry1
-    url = https://github.com/sinycat/foundry1.git  # 替换为实际的 GitHub 地址
-
 [submodule "openspace_foundry"]
     path = openspace_foundry
     url = https://github.com/sinycat/openspace_foundry.git  # 替换为实际的 GitHub 地址
