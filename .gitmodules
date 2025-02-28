@@ -1,15 +1,19 @@
 [submodule "foundry1"]
-	path = foundry1
-	url = ./foundry1
+    path = foundry1
+    url = https://github.com/sinycat/foundry1.git  # 替换为实际的 GitHub 地址
+
 [submodule "openspace_foundry"]
-	path = openspace_foundry
-	url = ./openspace_foundry
+    path = openspace_foundry
+    url = https://github.com/sinycat/openspace_foundry.git  # 替换为实际的 GitHub 地址
+
 [submodule "openspace_foundry1"]
-	path = openspace_foundry1
-	url = ./openspace_foundry1
+    path = openspace_foundry1
+    url = https://github.com/sinycat/openspace_foundry1.git  # 替换为实际的 GitHub 地址
+
 [submodule "OpenSpaceWeb3BootCamp_S5"]
-	path = OpenSpaceWeb3BootCamp_S5
-	url = ./OpenSpaceWeb3BootCamp_S5
+    path = OpenSpaceWeb3BootCamp_S5
+    url = https://github.com/sinycat/OpenSpaceWeb3BootCamp_S5.git  # 替换为实际的 GitHub 地址
+
 [submodule "openspace_front"]
-	path = openspace_front
-	url = https://github.com/sinycat/openspace_front.git
+    path = openspace_front
+    url = https://github.com/sinycat/openspace_front.git  # 替换为实际的 GitHub 地址
