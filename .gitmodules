@@ -10,3 +10,6 @@
 [submodule "OpenSpaceWeb3BootCamp_S5"]
 	path = OpenSpaceWeb3BootCamp_S5
 	url = ./OpenSpaceWeb3BootCamp_S5
+[submodule "openspace_front"]
+	path = openspace_front
+	url = https://github.com/sinycat/openspace_front.git
