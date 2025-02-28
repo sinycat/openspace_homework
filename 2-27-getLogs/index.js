@@ -3,7 +3,7 @@ import { mainnet } from 'viem/chains';
 import dotenv from 'dotenv';
 import fs from 'fs/promises'; 
 
-// 本项目运行可获取以太坊主网最新100条USDC转账记录，并保存到本地transferRecord.txt文件中
+// 本项目运行可获取以太坊主网最新100个区块中的USDC的Transfer转账记录，并保存到本地transferRecord.txt文件中
 
 dotenv.config();
 
