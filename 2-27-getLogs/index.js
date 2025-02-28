@@ -3,6 +3,8 @@ import { mainnet } from 'viem/chains';
 import dotenv from 'dotenv';
 import fs from 'fs/promises'; // 使用 Node.js 的 fs/promises 模块进行异步文件操作
 
+// 本项目运行可获取以太坊主网最新100条USDC转账记录，并保存到本地transferRecord.txt文件中
+
 dotenv.config();
 
 // 使用 process.env 来获取环境变量
